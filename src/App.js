@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import Button from "./components/Button";
+import Header from "./components/Header";
+import Modal from "./components/Modal";
+import NoteList from "./components/NoteList";
+import { getInitialData } from "./utils";
 
-function App() {
+const App = () => {
+  const [notes, setNotes] = useState(getInitialData());
+  const [showModal, setShowModal] = useState(false);
+
+  const openModal = () => {
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="main-container">
+      <Header />
+      <Button onClick={() => openModal()} />
+      <NoteList data={notes} />
+      <Modal
+        title="Tambah catatan"
+        show={showModal}
+        handleClose={() => closeModal()}
+      >
+        Test
+      </Modal>
     </div>
   );
-}
+};
 
 export default App;
