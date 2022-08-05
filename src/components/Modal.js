@@ -6,7 +6,14 @@ const Modal = ({ title, handleClose, show, children }) => {
     <div className={showModalClass}>
       <div className="modal-content">
         <div className="modal-header">
-          <h3 className="modal-title">{title}</h3>
+          <div className="col">
+            <input
+              type="text"
+              className="modal-title"
+              placeholder="Judul catatan..."
+            />
+          </div>
+          <p className="modal-title-count">50/50</p>
           <button type="button" className="modal-close" onClick={handleClose}>
             <i className="fa fa-times fa-lg"></i>
           </button>
