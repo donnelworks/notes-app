@@ -1,13 +1,28 @@
 import React from "react";
 import NoteItem from "./NoteItem";
+import EmptyNote from "./EmptyNote";
 
-const NoteList = ({ data }) => {
+const NoteList = ({ data, onDelete, onStatus }) => {
+  const length = data.length;
   return (
-    <div className="note-list">
-      {data.map((note) => (
-        <NoteItem key={note.id} id={note.id} {...note} />
-      ))}
-    </div>
+    <>
+      {length > 0 ? (
+        <div className="note-list">
+          {data.map((note) => (
+            <NoteItem
+              key={note.id}
+              id={note.id}
+              archived={note.archived}
+              onDelete={() => onDelete(note.id)}
+              onStatus={() => onStatus(note.id)}
+              {...note}
+            />
+          ))}
+        </div>
+      ) : (
+        <EmptyNote />
+      )}
+    </>
   );
 };
 

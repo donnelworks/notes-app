@@ -1,10 +1,10 @@
 import React from "react";
 
-const Button = ({ ...props }) => {
+const Button = ({ type, children, block, ...props }) => {
+  const buttonClass = block ? "btn btn-block" : "btn";
   return (
-    <button type="button" className="btn" {...props}>
-      <i className="fa fa-plus-circle fa-lg"></i>
-      Buat catatan
+    <button className={buttonClass} {...props}>
+      {children}
     </button>
   );
 };
