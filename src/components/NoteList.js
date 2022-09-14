@@ -1,6 +1,7 @@
 import React from "react";
 import NoteItem from "./NoteItem";
 import EmptyNote from "./EmptyNote";
+import PropTypes from "prop-types";
 
 const NoteList = ({ data, onDelete, onStatus }) => {
   const length = data.length;
@@ -24,6 +25,12 @@ const NoteList = ({ data, onDelete, onStatus }) => {
       )}
     </>
   );
+};
+
+NoteList.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.object),
+  onDelete: PropTypes.func.isRequired,
+  onStatus: PropTypes.func.isRequired,
 };
 
 export default NoteList;

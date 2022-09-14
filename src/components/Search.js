@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const Search = ({ keyword, onSearch }) => {
   return (
@@ -12,6 +13,11 @@ const Search = ({ keyword, onSearch }) => {
       />
     </div>
   );
+};
+
+Search.propTypes = {
+  keyword: PropTypes.string,
+  onSearch: PropTypes.func.isRequired,
 };
 
 export default Search;

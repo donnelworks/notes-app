@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import NoteDetail from "../components/NoteDetail";
 import { getNote } from "../utils";
+import PropTypes from "prop-types";
 
 const DetailPageWrapper = () => {
   const { id } = useParams();
@@ -16,6 +17,10 @@ const DetailPage = ({ id }) => {
       <NoteDetail {...note} />
     </section>
   );
+};
+
+DetailPage.propTypes = {
+  id: PropTypes.string.isRequired,
 };
 
 export default DetailPageWrapper;

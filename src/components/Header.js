@@ -9,9 +9,7 @@ const Header = () => {
         <h1 className="header-title">My Notes</h1>
         <div className="col">
           <Navigation />
-          {/* <Search onSearch={onSearch} /> */}
         </div>
-        <h5>Theme Mode</h5>
       </div>
     </div>
   );

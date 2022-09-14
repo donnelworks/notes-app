@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const NoteFooter = ({ id, onDelete, onStatus, archived }) => {
   return (
@@ -27,6 +28,13 @@ const NoteFooter = ({ id, onDelete, onStatus, archived }) => {
       </div>
     </div>
   );
+};
+
+NoteFooter.propTypes = {
+  id: PropTypes.string.isRequired,
+  onDelete: PropTypes.func.isRequired,
+  onStatus: PropTypes.func.isRequired,
+  archived: PropTypes.bool.isRequired,
 };
 
 export default NoteFooter;

@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { showFormattedDate } from "../utils";
 import NoteFooter from "./NoteFooter";
+import parser from "html-react-parser";
+import PropTypes from "prop-types";
 
 const NoteItem = ({
   id,
@@ -18,7 +20,7 @@ const NoteItem = ({
         <Link to={`/note/${id}`}>{title}</Link>
       </h3>
       <p className="note-item-date">{showFormattedDate(createdAt)}</p>
-      <p className="note-item-content">{body}</p>
+      <p className="note-item-content">{parser(body)}</p>
       <NoteFooter
         id={id}
         onDelete={onDelete}
@@ -27,6 +29,15 @@ const NoteItem = ({
       />
     </div>
   );
+};
+
+NoteItem.propTypes = {
+  id: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  createdAt: PropTypes.string.isRequired,
+  archived: PropTypes.bool.isRequired,
+  onDelete: PropTypes.func.isRequired,
+  onStatus: PropTypes.func.isRequired,
 };
 
 export default NoteItem;

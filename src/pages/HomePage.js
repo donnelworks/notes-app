@@ -61,11 +61,15 @@ const HomePage = ({ defaultKeyword, keywordChange }) => {
         keyword={keyword}
         onSearch={(key) => onKeywordChangeHandler(key.target.value)}
       />
-      <Button type="button" onClick={() => toggleModal(true)}>
-        <i className="fa fa-plus-circle fa-lg"></i>
-        Buat catatan
-      </Button>
-      <h4 className="note-section">Catatan Aktif</h4>
+      <div className="row">
+        <div className="col justify-content-center">
+          <h4 className="note-section">Catatan Aktif</h4>
+        </div>
+        <Button type="button" onClick={() => toggleModal(true)}>
+          <i className="fa fa-plus-circle fa-lg"></i>
+          Buat catatan
+        </Button>
+      </div>
       <NoteList
         data={activeNotes}
         onDelete={(id) => onDeleteHandler(id)}
@@ -74,8 +78,6 @@ const HomePage = ({ defaultKeyword, keywordChange }) => {
 
       {/* Modal */}
       <Modal
-        title=""
-        content=""
         show={showModal}
         noteSubmit={(data) => onSubmitHandler(data)}
         handleClose={() => toggleModal(false)}

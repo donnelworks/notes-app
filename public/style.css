@@ -3,6 +3,8 @@
     --white: #FFFFFF;
     --gray: #D6D6D6;
     --dark-gray: #AAAAAA;
+    --danger: #CF6679;
+    --dark-danger: #9e3a4c;
 }
 
 * {
@@ -48,12 +50,20 @@ textarea {
     justify-content: center;
 }
 
+.justify-content-right {
+    justify-content: right;
+}
+
 .justify-content-between {
     justify-content: space-between;
 }
 
 .align-items-center {
     align-items: center;
+}
+
+.align-items-right {
+    align-items: right;
 }
 
 /* Main */
@@ -222,99 +232,140 @@ textarea {
     box-shadow: 0 15px 35px 0 rgba(60,66,87,.08),0 5px 15px 0 rgba(0,0,0,.12);
   }
 
-  .modal-header {
-    display: flex;
-    justify-content: space-between;
-    padding-bottom: 10px;
-    border-bottom: solid 1px var(--gray);
-  }
-
-  .modal-title {
-      margin-right: 10px;
-      font-weight: 700;
-      width: 100%;
-      border: 0;
-      font-size: 18px;
-  }
-
-  .modal-title-count {
-      margin: 0 10px;
-      font-size: 12px;
-      color: var(--dark-gray)
-  }
-
-  .modal-body {
-    padding: 10px 0;
-  }
-
-  .modal-body > textarea {
-    font-size: 16px;
-  }
-
-  .modal-footer {
-    padding: 10px 0;
-  }
-  
-  .modal-close{
-    color: var(--gray);
-    background-color: var(--white);
-    border: 0;
-    cursor: pointer;
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 10px;
+  border-bottom: solid 1px var(--gray);
 }
 
-  .display-block {
-    display: block;
-  }
-  
-  .display-none {
-    display: none;
-  }
-
-  .empty-note {
-    padding: 10px 0;
-  }
-
-  .text-center {
-    text-align: center;
-  }
-
-  .note-section {
-    margin-top: 20px;
-  }
-
-  .navigation ul li {
-    display: inline-block;
-    padding: 10px;
-  }
-   
-  .navigation ul li a {
-    text-decoration: none;
+.modal-title {
+    margin-right: 10px;
     font-weight: 700;
-    font-size: 16px;
-    color: var(--dark-gray);
-  }
-   
-  .navigation ul li a:focus {
-    text-decoration: underline;
-    color: var(--black);
-  }
-   
-  .navigation ul li a:hover {
-    text-decoration: underline;
-    color: var(--black);
-  }
+    width: 100%;
+    border: 0;
+    font-size: 18px;
+}
 
-  .note-detail {
-      width: 50%;
-    margin: 20px auto;
-  }
+.modal-title-count {
+    margin: 0 10px;
+    font-size: 12px;
+    color: var(--dark-gray)
+}
 
-  .note-detail-title {
-    font-size: 48px;
-  }
+.modal-body {
+  padding: 10px 0;
+  font-size: 16px;
+  width: 100%;
+  background-color: transparent;
+  border: 0;
+  outline: none;
+  min-height: 300px;
+  color: var(--black);
+}
 
-  .note-detail-date {
-    font-size: 16px;
-    margin: 5px 0 20px 0;
-    color: var(--dark-gray);
-  }
+[data-placeholder]:empty::before {
+  content: attr(data-placeholder);
+  color: var(--dark-gray)
+}
+
+.modal-footer {
+  padding: 10px 0;
+}
+
+.modal-close{
+  color: var(--gray);
+  background-color: var(--white);
+  border: 0;
+  cursor: pointer;
+}
+
+.display-block {
+  display: block;
+}
+
+.display-none {
+  display: none;
+}
+
+.empty-note {
+  padding: 10px 0;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.navigation ul li {
+  display: inline-block;
+  padding: 10px;
+}
+  
+.navigation ul li a {
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--dark-gray);
+}
+  
+.navigation ul li a:focus {
+  text-decoration: underline;
+  color: var(--black);
+}
+  
+.navigation ul li a:hover {
+  text-decoration: underline;
+  color: var(--black);
+}
+
+.note-detail {
+    width: 50%;
+  margin: 20px auto;
+}
+
+.note-detail-title {
+  font-size: 48px;
+}
+
+.note-detail-date {
+  font-size: 16px;
+  margin: 5px 0 20px 0;
+  color: var(--dark-gray);
+}
+
+.lost-page {
+  width: 60%;
+  margin: 20px auto;
+  text-align: center;
+}
+
+.lost-page h1 {
+  font-size: 100px;
+  margin: 20px;
+}
+
+.lost-page p {
+  color: var(--dark-gray);
+  margin-bottom: 20px;
+}
+
+/* Alert */
+.alert {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 0;
+  color: var(--white);
+  margin-bottom: 20px;
+}
+
+.alert-danger {
+  background-color: var(--danger);
+}
+
+.alert-close {
+  color: var(--dark-danger);
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+}
