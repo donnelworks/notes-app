@@ -5,6 +5,7 @@ import Modal from "../components/Modal";
 import NoteList from "../components/NoteList";
 import Search from "../components/Search";
 import { addNote, archiveNote, deleteNote, getActiveNotes } from "../utils";
+import PropTypes from "prop-types";
 
 function HomePageWrapper() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -84,6 +85,11 @@ const HomePage = ({ defaultKeyword, keywordChange }) => {
       />
     </section>
   );
+};
+
+HomePage.propTypes = {
+  defaultKeyword: PropTypes.string,
+  keywordChange: PropTypes.func.isRequired,
 };
 
 export default HomePageWrapper;

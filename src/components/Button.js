@@ -12,6 +12,7 @@ const Button = ({ children, block, ...props }) => {
 
 Button.propTypes = {
   block: PropTypes.bool,
+  children: PropTypes.node,
 };
 
 export default Button;

@@ -26,7 +26,7 @@ const Modal = ({ handleClose, show, noteSubmit }) => {
 
   const onSubmitData = (e) => {
     e.preventDefault();
-    if (form.title == "") {
+    if (form.title === "") {
       setAlertVisible(true);
     } else {
       noteSubmit(form);
