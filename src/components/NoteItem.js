@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { showFormattedDate } from "../utils";
 import NoteFooter from "./NoteFooter";
 
@@ -13,7 +14,9 @@ const NoteItem = ({
 }) => {
   return (
     <div className="note-item">
-      <h3 className="note-item-title">{title}</h3>
+      <h3 className="note-item-title">
+        <Link to={`/note/${id}`}>{title}</Link>
+      </h3>
       <p className="note-item-date">{showFormattedDate(createdAt)}</p>
       <p className="note-item-content">{body}</p>
       <NoteFooter

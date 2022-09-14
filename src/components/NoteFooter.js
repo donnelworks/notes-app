@@ -8,6 +8,7 @@ const NoteFooter = ({ id, onDelete, onStatus, archived }) => {
           type="button"
           className="btn-action"
           onClick={() => onStatus(id)}
+          title="Arsipkan"
         >
           {archived ? (
             <i className="bx bx-archive-out"></i>
@@ -19,6 +20,7 @@ const NoteFooter = ({ id, onDelete, onStatus, archived }) => {
           type="button"
           className="btn-action"
           onClick={() => onDelete(id)}
+          title="Hapus"
         >
           <i className="bx bx-trash"></i>
         </button>
