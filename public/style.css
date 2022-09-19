@@ -104,6 +104,22 @@ textarea {
     border: 0;
 }
 
+/* Input */
+.input-container {
+  margin: 16px 0;
+  border-bottom: solid 1px var(--gray);
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.input {
+  padding: 12px;
+  font-weight: 400;
+  width: 100%;
+  border: 0;
+}
+
 /* Button */
 .btn {
     font-weight: 700;
@@ -319,7 +335,7 @@ textarea {
 }
 
 .note-detail {
-    width: 50%;
+  width: 50%;
   margin: 20px auto;
 }
 
@@ -368,4 +384,9 @@ textarea {
   background-color: transparent;
   border: 0;
   cursor: pointer;
+}
+
+.login {
+  width: 50%;
+  margin: 20px auto;
 }
