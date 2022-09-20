@@ -15,7 +15,7 @@ const NoteDetail = ({ title, body, createdAt }) => {
 
 NoteDetail.propTypes = {
   title: PropTypes.string.isRequired,
-  body: PropTypes.string.isRequired,
+  body: PropTypes.string,
   createdAt: PropTypes.string.isRequired,
 };
 

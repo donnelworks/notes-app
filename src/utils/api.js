@@ -30,11 +30,10 @@ async function login({ email, password }) {
   const responseJson = await response.json();
 
   if (responseJson.status !== "success") {
-    alert(responseJson.message);
-    return { error: true, data: null };
+    return { error: true, data: null, msg: responseJson.message };
   }
 
-  return { error: false, data: responseJson.data };
+  return { error: false, data: responseJson.data, msg: "" };
 }
 
 async function register({ name, email, password }) {
@@ -49,11 +48,10 @@ async function register({ name, email, password }) {
   const responseJson = await response.json();
 
   if (responseJson.status !== "success") {
-    alert(responseJson.message);
-    return { error: true };
+    return { error: true, msg: responseJson.message };
   }
 
-  return { error: false };
+  return { error: false, msg: "" };
 }
 
 async function getUserLogged() {
@@ -67,13 +65,13 @@ async function getUserLogged() {
   return { error: false, data: responseJson.data };
 }
 
-async function addNote({ title, body }) {
+async function addNote({ title, content }) {
   const response = await fetchWithToken(`${BASE_URL}/notes`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ title, body }),
+    body: JSON.stringify({ title, body: content }),
   });
 
   const responseJson = await response.json();

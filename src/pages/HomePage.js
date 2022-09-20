@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import Button from "../components/Button";
 import Modal from "../components/Modal";
 import NoteList from "../components/NoteList";
 import Search from "../components/Search";
-import { addNote, archiveNote, deleteNote, getActiveNotes } from "../utils";
 import PropTypes from "prop-types";
+import { addNote, getActiveNotes, deleteNote, archiveNote } from "../utils/api";
+import Loading from "../components/Loading";
 
 function HomePageWrapper() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -21,9 +22,10 @@ function HomePageWrapper() {
 }
 
 const HomePage = ({ defaultKeyword, keywordChange }) => {
-  let [activeNotes, setActiveNotes] = useState(getActiveNotes());
+  let [activeNotes, setActiveNotes] = useState([]);
   const [keyword, setKeyword] = useState(defaultKeyword || "");
   const [showModal, setShowModal] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   activeNotes = activeNotes.filter((note) => {
     return note.title
@@ -32,14 +34,28 @@ const HomePage = ({ defaultKeyword, keywordChange }) => {
       .includes(keyword.toString().toLowerCase());
   });
 
-  function onDeleteHandler(id) {
-    deleteNote(id);
-    setActiveNotes(getActiveNotes());
+  useEffect(() => {
+    loadActiveNotes();
+
+    return () => {
+      setActiveNotes([]);
+    };
+  }, []);
+
+  async function loadActiveNotes() {
+    const { data } = await getActiveNotes();
+    setActiveNotes(data);
+    setLoading(false);
   }
 
-  function onStatusHandler(id) {
-    archiveNote(id);
-    setActiveNotes(getActiveNotes());
+  async function onDeleteHandler(id) {
+    await deleteNote(id);
+    loadActiveNotes();
+  }
+
+  async function onStatusHandler(id) {
+    await archiveNote(id);
+    loadActiveNotes();
   }
 
   function onKeywordChangeHandler(val) {
@@ -47,9 +63,9 @@ const HomePage = ({ defaultKeyword, keywordChange }) => {
     keywordChange(val);
   }
 
-  const onSubmitHandler = (data) => {
-    addNote(data);
-    setActiveNotes(getActiveNotes());
+  const onSubmitHandler = async (note) => {
+    await addNote(note);
+    loadActiveNotes();
   };
 
   const toggleModal = (toggle) => {
@@ -63,7 +79,7 @@ const HomePage = ({ defaultKeyword, keywordChange }) => {
         onSearch={(key) => onKeywordChangeHandler(key.target.value)}
       />
       <div className="row">
-        <div className="col justify-content-center">
+        <div className="col">
           <h4 className="note-section">Catatan Aktif</h4>
         </div>
         <Button type="button" onClick={() => toggleModal(true)}>
@@ -71,11 +87,15 @@ const HomePage = ({ defaultKeyword, keywordChange }) => {
           Buat catatan
         </Button>
       </div>
-      <NoteList
-        data={activeNotes}
-        onDelete={(id) => onDeleteHandler(id)}
-        onStatus={(id) => onStatusHandler(id)}
-      />
+      {loading ? (
+        <Loading />
+      ) : (
+        <NoteList
+          data={activeNotes}
+          onDelete={(id) => onDeleteHandler(id)}
+          onStatus={(id) => onStatusHandler(id)}
+        />
+      )}
 
       {/* Modal */}
       <Modal

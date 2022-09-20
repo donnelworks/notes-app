@@ -17,7 +17,7 @@ const NoteItem = ({
   return (
     <div className="note-item">
       <h3 className="note-item-title">
-        <Link to={`/note/${id}`}>{title}</Link>
+        <Link to={`/notes/${id}`}>{title}</Link>
       </h3>
       <p className="note-item-date">{showFormattedDate(createdAt)}</p>
       <p className="note-item-content">{parser(body)}</p>

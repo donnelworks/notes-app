@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import NoteList from "../components/NoteList";
 import Search from "../components/Search";
-import { deleteNote, getArchivedNotes, unarchiveNote } from "../utils";
+import { deleteNote, getArchivedNotes, unarchiveNote } from "../utils/api";
 import PropTypes from "prop-types";
+import Loading from "../components/Loading";
 
 function ArchivePageWrapper() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -19,8 +20,9 @@ function ArchivePageWrapper() {
 }
 
 const ArchivePage = ({ defaultKeyword, keywordChange }) => {
-  let [archiveNotes, setArchiveNotes] = useState(getArchivedNotes());
+  let [archiveNotes, setArchiveNotes] = useState([]);
   const [keyword, setKeyword] = useState(defaultKeyword || "");
+  const [loading, setLoading] = useState(true);
 
   archiveNotes = archiveNotes.filter((note) => {
     return note.title
@@ -29,14 +31,28 @@ const ArchivePage = ({ defaultKeyword, keywordChange }) => {
       .includes(keyword.toString().toLowerCase());
   });
 
-  function onDeleteHandler(id) {
-    deleteNote(id);
-    setArchiveNotes(getArchivedNotes());
+  useEffect(() => {
+    loadArchieveNotes();
+
+    return () => {
+      setArchiveNotes([]);
+    };
+  }, []);
+
+  async function loadArchieveNotes() {
+    const { data } = await getArchivedNotes();
+    setArchiveNotes(data);
+    setLoading(false);
   }
 
-  function onStatusHandler(id) {
-    unarchiveNote(id);
-    setArchiveNotes(getArchivedNotes());
+  async function onDeleteHandler(id) {
+    await deleteNote(id);
+    loadArchieveNotes();
+  }
+
+  async function onStatusHandler(id) {
+    await unarchiveNote(id);
+    loadArchieveNotes();
   }
 
   function onKeywordChangeHandler(val) {
@@ -51,11 +67,15 @@ const ArchivePage = ({ defaultKeyword, keywordChange }) => {
         onSearch={(key) => onKeywordChangeHandler(key.target.value)}
       />
       <h4 className="note-section">Catatan Arsip</h4>
-      <NoteList
-        data={archiveNotes}
-        onDelete={(id) => onDeleteHandler(id)}
-        onStatus={(id) => onStatusHandler(id)}
-      />
+      {loading ? (
+        <Loading />
+      ) : (
+        <NoteList
+          data={archiveNotes}
+          onDelete={(id) => onDeleteHandler(id)}
+          onStatus={(id) => onStatusHandler(id)}
+        />
+      )}
     </section>
   );
 };

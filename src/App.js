@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
 import {
@@ -9,43 +9,89 @@ import {
   LostPage,
   RegisterPage,
 } from "./pages";
+import { getUserLogged, putAccessToken } from "./utils/api";
+import { ThemeProvider } from "./contexts/ThemeContext";
 
 const App = () => {
   const [authUser, setAuthUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+
+  useEffect(() => {
+    checkAuth();
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+  }, [theme]);
+
+  const checkAuth = async () => {
+    const { data } = await getUserLogged();
+    setAuthUser(data);
+    setLoading(false);
+  };
+
+  const onLoginHandler = async ({ accessToken }) => {
+    putAccessToken(accessToken);
+    const { data } = await getUserLogged();
+    setAuthUser(data);
+  };
+
+  const onLogout = () => {
+    setAuthUser(null);
+    putAccessToken("");
+  };
+
+  const toggleTheme = () => {
+    const newTheme = theme === "light" ? "dark" : "light";
+    localStorage.setItem("theme", newTheme);
+    setTheme(newTheme);
+  };
+
+  if (loading) {
+    return null;
+  }
 
   if (authUser === null) {
     return (
+      <ThemeProvider value={{ theme, toggleTheme }}>
+        <div className="main-container">
+          <header>
+            <Header user={authUser} />
+          </header>
+          <main>
+            <Routes>
+              <Route
+                path="/*"
+                element={<LoginPage onLogin={(data) => onLoginHandler(data)} />}
+              />
+              <Route path="/register" element={<RegisterPage />} />
+              {/* 404 Page */}
+              <Route path="*" element={<LostPage />} />
+            </Routes>
+          </main>
+        </div>
+      </ThemeProvider>
+    );
+  }
+
+  return (
+    <ThemeProvider value={{ theme, toggleTheme }}>
       <div className="main-container">
         <header>
-          <Header />
+          <Header user={authUser} logout={() => onLogout()} />
         </header>
         <main>
           <Routes>
-            <Route path="/*" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/" element={<HomePage />} />
+            <Route path="/notes/:id" element={<DetailPage />} />
+            <Route path="/arsip" element={<ArchivePage />} />
             {/* 404 Page */}
             <Route path="*" element={<LostPage />} />
           </Routes>
         </main>
       </div>
-    );
-  }
-
-  return (
-    <div className="main-container">
-      <header>
-        <Header />
-      </header>
-      <main>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/note/:id" element={<DetailPage />} />
-          <Route path="/arsip" element={<ArchivePage />} />
-          {/* 404 Page */}
-          <Route path="*" element={<LostPage />} />
-        </Routes>
-      </main>
-    </div>
+    </ThemeProvider>
   );
 };
 

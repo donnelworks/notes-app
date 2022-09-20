@@ -1,34 +1,28 @@
-import React from "react";
-import Button from "../components/Button";
-import Input from "../components/Input";
-import { useInput } from "../hooks";
+import React, { useState } from "react";
+import Alert from "../components/Alert";
+import LoginInput from "../components/LoginInput";
+import { login } from "../utils/api";
 
-const LoginPage = () => {
-  const [email, onEmailChange] = useInput("");
-  const [password, onPasswordChange] = useInput("");
+const LoginPage = ({ onLogin }) => {
+  const [alert, setAlert] = useState({ visible: false, msg: "" });
 
+  const onSubmitHandler = async (note) => {
+    const { error, data, msg } = await login(note);
+    if (!error) {
+      onLogin(data);
+    } else {
+      setAlert({ ...alert, visible: true, msg: msg });
+    }
+  };
   return (
     <section className="login">
       <h4 className="note-section">Masuk dengan akun kamu</h4>
-      <form>
-        <Input
-          type="email"
-          value={email}
-          onChange={onEmailChange}
-          placeholder="Email"
-          icon="bx bx-envelope"
-        />
-        <Input
-          type="password"
-          value={password}
-          onChange={onPasswordChange}
-          placeholder="Password"
-          icon="bx bx-lock-alt"
-        />
-        <Button type="submit" block>
-          Masuk
-        </Button>
-      </form>
+      <Alert
+        show={alert.visible}
+        msg={alert.msg}
+        onClose={() => setAlert({ ...alert, visible: false, msg: "" })}
+      />
+      <LoginInput dataSubmit={(note) => onSubmitHandler(note)} />
     </section>
   );
 };

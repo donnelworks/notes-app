@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import NoteDetail from "../components/NoteDetail";
-import { getNote } from "../utils";
+import { getNote } from "../utils/api";
 import PropTypes from "prop-types";
+import Loading from "../components/Loading";
 
 const DetailPageWrapper = () => {
   const { id } = useParams();
@@ -10,7 +11,26 @@ const DetailPageWrapper = () => {
 };
 
 const DetailPage = ({ id }) => {
-  const [note, setNote] = useState(getNote(id));
+  const [note, setNote] = useState({});
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    loadDetailNote();
+
+    return () => {
+      setNote({});
+    };
+  }, []);
+
+  async function loadDetailNote() {
+    const { data } = await getNote(id);
+    setNote(data);
+    setLoading(false);
+  }
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <section>

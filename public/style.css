@@ -1,10 +1,17 @@
 :root {
-    --black: #000000;
-    --white: #FFFFFF;
-    --gray: #D6D6D6;
-    --dark-gray: #AAAAAA;
-    --danger: #CF6679;
-    --dark-danger: #9e3a4c;
+  --black: #000000;
+  --white: #FFFFFF;
+  --gray: #D6D6D6;
+  --dark-gray: #AAAAAA;
+  --danger: #CF6679;
+  --dark-danger: #9e3a4c;
+  --modal: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme='dark'] {
+  --black: #FFFFFF;
+  --white: #000000;
+  --modal: rgba(170, 170, 170, 0.5);
 }
 
 * {
@@ -16,11 +23,17 @@
 
 body {
     background-color: var(--white);
+    color: var(--black);
 }
 
 input, button {
     outline: none !important;
     font-size: 16px;
+}
+
+input {
+  background-color: transparent;
+  color: var(--black);
 }
 
 textarea {
@@ -31,19 +44,24 @@ textarea {
     border: 0;
 }
 
-/* Layout */
-.row {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    width: 100%;
+a {
+  text-decoration: none;
+  color: var(--black);
 }
 
+/* Layout */
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  }
+  
 .col {
-    display: flex;
-    flex-direction: column;
-    flex-basis: 100%;
-    flex: 1;
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
 }
 
 .justify-content-center {
@@ -64,6 +82,10 @@ textarea {
 
 .align-items-right {
     align-items: right;
+}
+
+.text-right {
+  text-align: right;
 }
 
 /* Main */
@@ -229,7 +251,7 @@ textarea {
     left: 0;
     width:100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: var(--modal);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -334,6 +356,23 @@ textarea {
   color: var(--black);
 }
 
+.navigation ul li button {
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  color: var(--dark-gray);
+}
+
+.navigation ul li button i {
+  font-size: 30px;
+}
+
+.navigation ul li button:hover {
+  color: var(--black);
+}
+
 .note-detail {
   width: 50%;
   margin: 20px auto;
@@ -372,7 +411,7 @@ textarea {
   border-radius: 8px;
   border: 0;
   color: var(--white);
-  margin-bottom: 20px;
+  margin: 10px 0 20px 0;
 }
 
 .alert-danger {
@@ -386,7 +425,16 @@ textarea {
   cursor: pointer;
 }
 
-.login {
+.login, .register {
   width: 50%;
   margin: 20px auto;
+}
+
+.note-section {
+  font-size: 20px;
+  color: var(--black);
+}
+
+.loader {
+  font-size: 40px;
 }
