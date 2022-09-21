@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
+import { LocaleContext } from "../contexts/LocaleContext";
+import { note } from "../utils/content";
 
 const NoteFooter = ({ id, onDelete, onStatus, archived }) => {
+  const { locale } = useContext(LocaleContext);
   return (
     <div className="note-footer">
       <div className="row align-items-center justify-content-between">
@@ -9,7 +12,7 @@ const NoteFooter = ({ id, onDelete, onStatus, archived }) => {
           type="button"
           className="btn-action"
           onClick={() => onStatus(id)}
-          title="Arsipkan"
+          title={archived ? note[locale].active : note[locale].archive}
         >
           {archived ? (
             <i className="bx bx-archive-out"></i>
@@ -21,7 +24,7 @@ const NoteFooter = ({ id, onDelete, onStatus, archived }) => {
           type="button"
           className="btn-action"
           onClick={() => onDelete(id)}
-          title="Hapus"
+          title={note[locale].delete}
         >
           <i className="bx bx-trash"></i>
         </button>

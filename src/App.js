@@ -11,11 +11,13 @@ import {
 } from "./pages";
 import { getUserLogged, putAccessToken } from "./utils/api";
 import { ThemeProvider } from "./contexts/ThemeContext";
+import { LocaleProvider } from "./contexts/LocaleContext";
 
 const App = () => {
   const [authUser, setAuthUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+  const [locale, setLocale] = useState(localStorage.getItem("locale") || "id");
 
   useEffect(() => {
     checkAuth();
@@ -48,6 +50,12 @@ const App = () => {
     setTheme(newTheme);
   };
 
+  const toggleLocale = () => {
+    const newLocale = locale === "id" ? "en" : "id";
+    localStorage.setItem("locale", newLocale);
+    setLocale(newLocale);
+  };
+
   if (loading) {
     return null;
   }
@@ -55,42 +63,48 @@ const App = () => {
   if (authUser === null) {
     return (
       <ThemeProvider value={{ theme, toggleTheme }}>
-        <div className="main-container">
-          <header>
-            <Header user={authUser} />
-          </header>
-          <main>
-            <Routes>
-              <Route
-                path="/*"
-                element={<LoginPage onLogin={(data) => onLoginHandler(data)} />}
-              />
-              <Route path="/register" element={<RegisterPage />} />
-              {/* 404 Page */}
-              <Route path="*" element={<LostPage />} />
-            </Routes>
-          </main>
-        </div>
+        <LocaleProvider value={{ locale, toggleLocale }}>
+          <div className="main-container">
+            <header>
+              <Header user={authUser} />
+            </header>
+            <main>
+              <Routes>
+                <Route
+                  path="/*"
+                  element={
+                    <LoginPage onLogin={(data) => onLoginHandler(data)} />
+                  }
+                />
+                <Route path="/register" element={<RegisterPage />} />
+                {/* 404 Page */}
+                <Route path="*" element={<LostPage />} />
+              </Routes>
+            </main>
+          </div>
+        </LocaleProvider>
       </ThemeProvider>
     );
   }
 
   return (
     <ThemeProvider value={{ theme, toggleTheme }}>
-      <div className="main-container">
-        <header>
-          <Header user={authUser} logout={() => onLogout()} />
-        </header>
-        <main>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/notes/:id" element={<DetailPage />} />
-            <Route path="/arsip" element={<ArchivePage />} />
-            {/* 404 Page */}
-            <Route path="*" element={<LostPage />} />
-          </Routes>
-        </main>
-      </div>
+      <LocaleProvider value={{ locale, toggleLocale }}>
+        <div className="main-container">
+          <header>
+            <Header user={authUser} logout={() => onLogout()} />
+          </header>
+          <main>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/notes/:id" element={<DetailPage />} />
+              <Route path="/arsip" element={<ArchivePage />} />
+              {/* 404 Page */}
+              <Route path="*" element={<LostPage />} />
+            </Routes>
+          </main>
+        </div>
+      </LocaleProvider>
     </ThemeProvider>
   );
 };

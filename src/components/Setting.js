@@ -1,11 +1,18 @@
 import React, { useContext } from "react";
 import { ThemeContext } from "../contexts/ThemeContext";
+import { LocaleContext } from "../contexts/LocaleContext";
 
-const ToggleTheme = () => {
+const Setting = () => {
   const { theme, toggleTheme } = useContext(ThemeContext);
+  const { toggleLocale } = useContext(LocaleContext);
   return (
     <nav className="navigation">
       <ul>
+        <li>
+          <button onClick={toggleLocale}>
+            <i className="bx bx-globe"></i>
+          </button>
+        </li>
         <li>
           <button onClick={toggleTheme}>
             {theme === "light" ? (
@@ -20,4 +27,4 @@ const ToggleTheme = () => {
   );
 };
 
-export default ToggleTheme;
+export default Setting;

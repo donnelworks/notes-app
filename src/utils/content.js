@@ -1,4 +1,4 @@
-const login = {
+const loginPage = {
   id: {
     subtitle: "Masuk dengan akun kamu",
     question: "Belum punya akun?",
@@ -13,7 +13,7 @@ const login = {
   },
 };
 
-const register = {
+const registerPage = {
   id: {
     subtitle: "Buat akun kamu dulu",
     button: "Daftar",
@@ -24,27 +24,36 @@ const register = {
   },
 };
 
-const home = {
+const homePage = {
   id: {
     subtitle: "Catatan aktif",
     button: "Buat catatan",
-    empty: "Tidak ada catatan",
   },
   en: {
     subtitle: "Active note",
     button: "Create note",
-    empty: "No note in list",
   },
 };
 
-const archive = {
+const archivePage = {
   id: {
     subtitle: "Catatan arsip",
-    empty: "Tidak ada catatan",
   },
   en: {
     subtitle: "Archive note",
-    empty: "No note in list",
+  },
+};
+
+const create = {
+  id: {
+    title: "Judul",
+    body: "Tulis catatan...",
+    button: "Simpan catatan",
+  },
+  en: {
+    title: "Title",
+    body: "Write notes...",
+    button: "Save note",
   },
 };
 
@@ -53,12 +62,35 @@ const note = {
     archive: "Arsipkan",
     active: "Aktifkan",
     delete: "Hapus",
+    empty: "Tidak ada catatan",
   },
   en: {
     archive: "Archive",
     active: "Activate",
     delete: "Delete",
+    empty: "No note in list",
   },
 };
 
-export { login, register, home, archive, note };
+const lostPage = {
+  id: {
+    congrats: "Selamat! Kamu menemukan One Piece!",
+    detail: "Ayo kembali berlayar dan menjadi Hokage!",
+    button: "Kembali",
+  },
+  en: {
+    congrats: "Congratulation! You found One Piece!",
+    detail: "Let's go back to sailing and become Hokage!",
+    button: "Go back",
+  },
+};
+
+export {
+  loginPage,
+  registerPage,
+  homePage,
+  archivePage,
+  create,
+  note,
+  lostPage,
+};

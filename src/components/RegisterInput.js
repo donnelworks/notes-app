@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useInput } from "../hooks";
 import Button from "./Button";
 import Input from "./Input";
 import PropTypes from "prop-types";
+import { LocaleContext } from "../contexts/LocaleContext";
+import { registerPage } from "../utils/content";
 
 const RegisterInput = ({ dataSubmit }) => {
+  const { locale } = useContext(LocaleContext);
   const [name, onNameChange] = useInput("");
   const [email, onEmailChange] = useInput("");
   const [password, onPasswordChange] = useInput("");
@@ -21,7 +24,7 @@ const RegisterInput = ({ dataSubmit }) => {
           type="text"
           value={name}
           onChange={onNameChange}
-          placeholder="Name"
+          placeholder={locale === "id" ? "Nama" : "Name"}
           icon="bx bx-user"
         />
         <Input
@@ -40,7 +43,7 @@ const RegisterInput = ({ dataSubmit }) => {
           icon="bx bx-lock-alt"
         />
         <div className="row justify-content-right">
-          <Button type="submit">Buat akun</Button>
+          <Button type="submit">{registerPage[locale].button}</Button>
         </div>
       </form>
     </>

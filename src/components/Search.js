@@ -1,14 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
+import { LocaleContext } from "../contexts/LocaleContext";
 
 const Search = ({ keyword, onSearch }) => {
+  const { locale } = useContext(LocaleContext);
   return (
     <div className="search-container align-items-center">
       <i className="fa fa-search"></i>
       <input
         value={keyword}
         className="search-input"
-        placeholder="Cari judul catatan ..."
+        placeholder={
+          locale === "id" ? "Cari judul catatan ..." : "Search title ..."
+        }
         onChange={(val) => onSearch(val)}
       />
     </div>

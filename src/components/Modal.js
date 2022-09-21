@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useRef } from "react";
 import Button from "./Button";
 import PropTypes from "prop-types";
 import Alert from "./Alert";
+import { LocaleContext } from "../contexts/LocaleContext";
+import { create } from "../utils/content";
 
 const Modal = ({ handleClose, show, noteSubmit }) => {
+  const { locale } = useContext(LocaleContext);
   const showModalClass = show ? "modal display-block" : "modal display-none";
   const bodyRef = useRef("");
 
@@ -57,7 +60,7 @@ const Modal = ({ handleClose, show, noteSubmit }) => {
               <input
                 type="text"
                 className="modal-title"
-                placeholder="Judul"
+                placeholder={create[locale].title}
                 maxLength={50}
                 value={form.title}
                 onChange={(val) => handleChangeTitle(val.target.value)}
@@ -73,12 +76,12 @@ const Modal = ({ handleClose, show, noteSubmit }) => {
             value={form.content}
             className="modal-body"
             onInput={(e) => onChangeData(e.target.innerHTML, "content")}
-            data-placeholder="Buat catatan..."
+            data-placeholder={create[locale].body}
             contentEditable
           />
           <div className="modal-footer">
             <Button type="submit" block>
-              Simpan catatan
+              {create[locale].button}
             </Button>
           </div>
         </form>

@@ -158,14 +158,17 @@ async function deleteNote(id) {
   return { error: false, data: responseJson.data };
 }
 
-function showFormattedDate(date) {
+function showFormattedDate(date, locale) {
   const options = {
     weekday: "long",
     year: "numeric",
     month: "long",
     day: "numeric",
   };
-  return new Date(date).toLocaleDateString("id-ID", options);
+  return new Date(date).toLocaleDateString(
+    locale === "id" ? "id-ID" : "en-US",
+    options
+  );
 }
 
 export {

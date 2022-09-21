@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { useInput } from "../hooks";
 import Button from "./Button";
 import Input from "./Input";
 import PropTypes from "prop-types";
+import { LocaleContext } from "../contexts/LocaleContext";
+import { loginPage } from "../utils/content";
 
 const LoginInput = ({ dataSubmit }) => {
+  const { locale } = useContext(LocaleContext);
   const [email, onEmailChange] = useInput("");
   const [password, onPasswordChange] = useInput("");
 
@@ -34,13 +37,13 @@ const LoginInput = ({ dataSubmit }) => {
         <div className="row">
           <div className="col justify-content-center">
             <p>
-              Belum punya akun?
+              {loginPage[locale].question}
               <Link to="/register">
-                <strong> Buat akun</strong>
+                <strong> {loginPage[locale].link}</strong>
               </Link>
             </p>
           </div>
-          <Button type="submit">Masuk</Button>
+          <Button type="submit">{loginPage[locale].button}</Button>
         </div>
       </form>
     </>

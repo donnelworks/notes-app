@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import NoteList from "../components/NoteList";
 import Search from "../components/Search";
 import { deleteNote, getArchivedNotes, unarchiveNote } from "../utils/api";
 import PropTypes from "prop-types";
 import Loading from "../components/Loading";
+import { LocaleContext } from "../contexts/LocaleContext";
+import { archivePage } from "../utils/content";
 
 function ArchivePageWrapper() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -20,6 +22,7 @@ function ArchivePageWrapper() {
 }
 
 const ArchivePage = ({ defaultKeyword, keywordChange }) => {
+  const { locale } = useContext(LocaleContext);
   let [archiveNotes, setArchiveNotes] = useState([]);
   const [keyword, setKeyword] = useState(defaultKeyword || "");
   const [loading, setLoading] = useState(true);
@@ -66,7 +69,7 @@ const ArchivePage = ({ defaultKeyword, keywordChange }) => {
         keyword={keyword}
         onSearch={(key) => onKeywordChangeHandler(key.target.value)}
       />
-      <h4 className="note-section">Catatan Arsip</h4>
+      <h4 className="note-section">{archivePage[locale].subtitle}</h4>
       {loading ? (
         <Loading />
       ) : (

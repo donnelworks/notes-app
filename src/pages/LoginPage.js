@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Alert from "../components/Alert";
 import LoginInput from "../components/LoginInput";
+import { LocaleContext } from "../contexts/LocaleContext";
 import { login } from "../utils/api";
+import { loginPage } from "../utils/content";
+import PropTypes from "prop-types";
 
 const LoginPage = ({ onLogin }) => {
+  const { locale } = useContext(LocaleContext);
   const [alert, setAlert] = useState({ visible: false, msg: "" });
 
   const onSubmitHandler = async (note) => {
@@ -16,7 +20,7 @@ const LoginPage = ({ onLogin }) => {
   };
   return (
     <section className="login">
-      <h4 className="note-section">Masuk dengan akun kamu</h4>
+      <h4 className="note-section">{loginPage[locale].subtitle} </h4>
       <Alert
         show={alert.visible}
         msg={alert.msg}
@@ -25,6 +29,10 @@ const LoginPage = ({ onLogin }) => {
       <LoginInput dataSubmit={(note) => onSubmitHandler(note)} />
     </section>
   );
+};
+
+LoginPage.propTypes = {
+  onLogin: PropTypes.func.isRequired,
 };
 
 export default LoginPage;

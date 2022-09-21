@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import Button from "../components/Button";
 import Modal from "../components/Modal";
@@ -7,6 +7,8 @@ import Search from "../components/Search";
 import PropTypes from "prop-types";
 import { addNote, getActiveNotes, deleteNote, archiveNote } from "../utils/api";
 import Loading from "../components/Loading";
+import { LocaleContext } from "../contexts/LocaleContext";
+import { homePage } from "../utils/content";
 
 function HomePageWrapper() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -22,6 +24,7 @@ function HomePageWrapper() {
 }
 
 const HomePage = ({ defaultKeyword, keywordChange }) => {
+  const { locale } = useContext(LocaleContext);
   let [activeNotes, setActiveNotes] = useState([]);
   const [keyword, setKeyword] = useState(defaultKeyword || "");
   const [showModal, setShowModal] = useState(false);
@@ -80,11 +83,11 @@ const HomePage = ({ defaultKeyword, keywordChange }) => {
       />
       <div className="row">
         <div className="col">
-          <h4 className="note-section">Catatan Aktif</h4>
+          <h4 className="note-section">{homePage[locale].subtitle}</h4>
         </div>
         <Button type="button" onClick={() => toggleModal(true)}>
           <i className="fa fa-plus-circle fa-lg"></i>
-          Buat catatan
+          {homePage[locale].button}
         </Button>
       </div>
       {loading ? (
