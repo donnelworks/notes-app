@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Button from "../components/Button";
 import { LocaleContext } from "../contexts/LocaleContext";
 import { lostPage } from "../utils/content";
+import "../styles/style.css";
 
 const LostPage = () => {
   const { locale } = useContext(LocaleContext);

@@ -2,6 +2,7 @@ import React from "react";
 import NoteItem from "./NoteItem";
 import EmptyNote from "./EmptyNote";
 import PropTypes from "prop-types";
+import "../styles/style.css";
 
 const NoteList = ({ data, onDelete, onStatus }) => {
   const length = data.length;

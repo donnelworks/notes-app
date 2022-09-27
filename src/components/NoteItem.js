@@ -5,6 +5,7 @@ import NoteFooter from "./NoteFooter";
 import parser from "html-react-parser";
 import PropTypes from "prop-types";
 import { LocaleContext } from "../contexts/LocaleContext";
+import "../styles/style.css";
 
 const NoteItem = ({
   id,

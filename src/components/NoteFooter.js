@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import { LocaleContext } from "../contexts/LocaleContext";
 import { note } from "../utils/content";
+import "../styles/style.css";
 
 const NoteFooter = ({ id, onDelete, onStatus, archived }) => {
   const { locale } = useContext(LocaleContext);

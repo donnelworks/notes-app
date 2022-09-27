@@ -4,6 +4,7 @@ import Logout from "./Logout";
 import PropTypes from "prop-types";
 import Setting from "./Setting";
 import { LocaleContext } from "../contexts/LocaleContext";
+import "../styles/style.css";
 
 const Header = ({ user, logout }) => {
   const { locale } = useContext(LocaleContext);

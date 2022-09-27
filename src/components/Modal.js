@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import Alert from "./Alert";
 import { LocaleContext } from "../contexts/LocaleContext";
 import { create } from "../utils/content";
+import "../styles/style.css";
 
 const Modal = ({ handleClose, show, noteSubmit }) => {
   const { locale } = useContext(LocaleContext);

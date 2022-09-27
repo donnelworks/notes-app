@@ -3,6 +3,7 @@ import { showFormattedDate } from "../utils/api";
 import PropTypes from "prop-types";
 import parser from "html-react-parser";
 import { LocaleContext } from "../contexts/LocaleContext";
+import "../styles/style.css";
 
 const NoteDetail = ({ title, body, createdAt }) => {
   const { locale } = useContext(LocaleContext);

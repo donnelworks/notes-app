@@ -9,6 +9,7 @@ import { addNote, getActiveNotes, deleteNote, archiveNote } from "../utils/api";
 import Loading from "../components/Loading";
 import { LocaleContext } from "../contexts/LocaleContext";
 import { homePage } from "../utils/content";
+import "../styles/style.css";
 
 function HomePageWrapper() {
   const [searchParams, setSearchParams] = useSearchParams();

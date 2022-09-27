@@ -5,6 +5,7 @@ import RegisterInput from "../components/RegisterInput";
 import { LocaleContext } from "../contexts/LocaleContext";
 import { register } from "../utils/api";
 import { registerPage } from "../utils/content";
+import "../styles/style.css";
 
 const RegisterPage = () => {
   const { locale } = useContext(LocaleContext);

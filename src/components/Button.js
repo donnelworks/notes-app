@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import "../styles/style.css";
 
 const Button = ({ children, block, ...props }) => {
   const buttonClass = block ? "btn btn-block" : "btn";

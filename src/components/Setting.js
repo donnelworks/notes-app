@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { LocaleContext } from "../contexts/LocaleContext";
+import "../styles/style.css";
 
 const Setting = () => {
   const { theme, toggleTheme } = useContext(ThemeContext);

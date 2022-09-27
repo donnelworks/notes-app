@@ -4,6 +4,7 @@ import NoteDetail from "../components/NoteDetail";
 import { getNote } from "../utils/api";
 import PropTypes from "prop-types";
 import Loading from "../components/Loading";
+import "../styles/style.css";
 
 const DetailPageWrapper = () => {
   const { id } = useParams();

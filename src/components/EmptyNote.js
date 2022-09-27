@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { LocaleContext } from "../contexts/LocaleContext";
 import { note } from "../utils/content";
+import "../styles/style.css";
 
 const EmptyNote = () => {
   const { locale } = useContext(LocaleContext);

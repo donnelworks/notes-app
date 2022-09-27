@@ -12,6 +12,7 @@ import {
 import { getUserLogged, putAccessToken } from "./utils/api";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { LocaleProvider } from "./contexts/LocaleContext";
+import "./styles/style.css";
 
 const App = () => {
   const [authUser, setAuthUser] = useState(null);

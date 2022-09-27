@@ -7,6 +7,7 @@ import PropTypes from "prop-types";
 import Loading from "../components/Loading";
 import { LocaleContext } from "../contexts/LocaleContext";
 import { archivePage } from "../utils/content";
+import "../styles/style.css";
 
 function ArchivePageWrapper() {
   const [searchParams, setSearchParams] = useSearchParams();

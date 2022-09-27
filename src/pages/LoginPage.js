@@ -5,6 +5,7 @@ import { LocaleContext } from "../contexts/LocaleContext";
 import { login } from "../utils/api";
 import { loginPage } from "../utils/content";
 import PropTypes from "prop-types";
+import "../styles/style.css";
 
 const LoginPage = ({ onLogin }) => {
   const { locale } = useContext(LocaleContext);

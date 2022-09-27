@@ -5,6 +5,7 @@ import Input from "./Input";
 import PropTypes from "prop-types";
 import { LocaleContext } from "../contexts/LocaleContext";
 import { registerPage } from "../utils/content";
+import "../styles/style.css";
 
 const RegisterInput = ({ dataSubmit }) => {
   const { locale } = useContext(LocaleContext);
