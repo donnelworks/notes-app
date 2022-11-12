@@ -220,30 +220,6 @@
       padding-top: 20px;
   }
   
-  @media only screen and (min-width: 500px) {
-      .note-list {
-          grid-template-columns: repeat(2, 1fr);
-      }
-  }
-  
-  @media only screen and (min-width: 800px) {
-      .note-list {
-          grid-template-columns: repeat(3, 1fr);
-      }
-  }
-  
-  @media only screen and (min-width: 1000px) {
-      .note-list {
-          grid-template-columns: repeat(4, 1fr);
-      }
-  }
-  
-  @media only screen and (min-width: 1200px) {
-      .note-list {
-          grid-template-columns: repeat(5, 1fr);
-      }
-  }
-  
   /* Modal */
   .modal {
       position: fixed;
@@ -262,7 +238,7 @@
       background: var(--white);
       width: 40%;
       height: auto;
-      top: 40%;
+      top: 50%;
       left: 50%;
       transform: translate(-50%,-50%);
       padding: 20px;
@@ -437,4 +413,72 @@
   
   .loader {
     font-size: 40px;
+  }
+
+  @media only screen and (min-width: 300px) and (max-width: 500px) {
+    .main-container {
+      width: 90%;
+    }
+    .header-title {
+      display: block;
+      width: 100%;
+      padding-right: 0;
+    }
+    .login {
+      width: 100%;
+      margin: 20px auto;
+    }
+    .btn {
+      display: block;
+      width: 100%;
+      margin-top: 20px;
+    }
+    .modal-content {
+      width: 90%;
+    }
+    .note-detail {
+      width: 100%;
+    }
+    .note-detail-title {
+      font-size: 30px;
+    }
+    .note-list {
+        grid-template-columns: repeat(1, 1fr);
+    }
+  }
+
+  @media only screen and (min-width: 500px) and (max-width: 800px) {
+    .header-title {
+      display: block;
+      width: 100%;
+      padding-right: 20px;
+    }
+    .login {
+      width: 100%;
+      margin: 20px auto;
+    }
+    .modal-content {
+      width: 80%;
+    }
+    .note-detail {
+      width: 100%;
+    }
+    .note-detail-title {
+      font-size: 36px;
+    }
+    .note-list {
+        grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media only screen and (min-width: 800px) and (max-width: 1000px) {
+      .note-list {
+          grid-template-columns: repeat(4, 1fr);
+      }
+  }
+
+  @media only screen and (min-width: 1000px) {
+      .note-list {
+          grid-template-columns: repeat(5, 1fr);
+      }
   }
